@@ -4,12 +4,12 @@ public class ListLevel2 {
 	public static void main(String[] args) {
 		
 		int [] arr3 = {0,3,6,5,6,7,90};
-		int [] arr4 = {5, 8, 3, 8, 2, 9};
+		int [] arr4 = {5, 8, 3, 3, 6, 9};
 		Node <Integer> L1 = bulid(arr4);
 		Node <Integer> L2 = bulid(arr3);
 		
 		//System.out.println(ex1(L1,L2));
-		System.out.println(ex3(L1,8));
+		System.out.println(ex6(L1));
 		
 	}
 	public static Node <Integer> bulid(int [] a){
@@ -95,26 +95,7 @@ public class ListLevel2 {
 		return dummy.getNext();
 	}
 	
-
-
-	public static int ex3(Node<Integer> list, int v) {
-		Node <Integer> p = list;
-		int count1 = 0;
-		int count2 = 0;
-		
-		while (p!=null || p.getValue()!=v) {
-			count1 ++;
-			p = p.getNext();
-		}
-		while (p!=null) {
-			count2 ++;
-			p = p.getNext();
-		}
-		
-		return count1 + count2;
-	}
-	
-	public static boolean ex4(Node<Integer> list) {
+	public static boolean ex4(Node<Integer> list) { // if all the values are different
 		Node <Integer> p = list;
 		while (p != null) {
 			Node <Integer> h = p.getNext();
@@ -129,7 +110,7 @@ public class ListLevel2 {
 		return true;
 	}
 	
-	public static Node<Integer> ex5(Node<Integer> list){
+	public static Node<Integer> ex5(Node<Integer> list){ //making a new list where each value appears once
 		Node <Integer> p = list;
 		Node <Integer> dummy = new Node<Integer> (-1);
 		Node<Integer> t = dummy;
@@ -152,4 +133,25 @@ public class ListLevel2 {
 		return dummy.getNext();
 	}
 	
+	public static int ex6(Node <Integer> list) {
+		int count = 1;
+		int maxCount = 0;
+		Node <Integer> p = list;
+		while(p.getNext()!=null) {
+			if (p.getNext().getValue()>=p.getValue()) {
+				count ++;
+			}
+			else {
+				if (count > maxCount) {
+					maxCount = count;
+				}
+				count = 1;
+			}
+			p = p.getNext();
+		}
+		if (count > maxCount) {
+			maxCount = count;
+		}
+		return maxCount;
+	}
 }
